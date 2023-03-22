@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
 import { Button } from '@mui/material'
 import styled from '@emotion/styled'
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -11,8 +11,11 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-function App() {
+const App = () => {
   const [count, setCount] = useState(0)
+  const params = useParams();
+  const navigate = useNavigate();
+  console.log('params',params['*'])
 
   return (
     <div className="App">
@@ -32,7 +35,8 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
-        <Button>MUI Button</Button>
+        <Button variant="contained" onClick={() => navigate(`/random/${(Math.random()*1000).toFixed()}`)}>MUI Random</Button>
+        <Button color="secondary" variant="contained" onClick={() => navigate(`/contra/contractual/edit/1`)}>MUI Contra</Button>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
