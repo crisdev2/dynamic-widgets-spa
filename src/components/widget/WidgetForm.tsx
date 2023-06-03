@@ -1,9 +1,10 @@
 import styled from '@emotion/styled'
-import { useFormik } from 'formik'
+import { Form, Formik, FormikProvider, useFormik } from 'formik'
 import * as yup from 'yup'
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 import { IWidgetForm as IWidgetModel } from '../../models/widgetsModel'
 import { Button, FormControl, TextField } from '@mui/material'
+import Field from '../field/Field'
 
 const StyledWidgetForm = styled.div`
 `
@@ -12,20 +13,21 @@ const StyledForm = styled.form`
 `
 
 const WidgetForm: FC<IWidgetForm> = ({ widget }) => {
+  const { widgetOptions } = widget
   const validationSchema = yup.object({
-    email: yup
-      .string()
-      .email('Enter a valid email')
-      .required('Email is required'),
-    password: yup
-      .string()
-      .min(8, 'Password should be of minimum 8 characters length')
-      .required('Password is required'),
+    // email: yup
+    //   .string()
+    //   .email('Enter a valid email')
+    //   .required('Email is required'),
+    // password: yup
+    //   .string()
+    //   .min(8, 'Password should be of minimum 8 characters length')
+    //   .required('Password is required'),
   });
   const formik = useFormik({
     initialValues: {
-      email: 'foobar@example.com',
-      password: 'foobar',
+      // email: 'foobar@example.com',
+      // password: 'foobar',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -35,7 +37,13 @@ const WidgetForm: FC<IWidgetForm> = ({ widget }) => {
   return (
     <StyledWidgetForm>
       <StyledForm onSubmit={formik.handleSubmit}>
-        <FormControl>
+        <FormikProvider value={formik}>
+          <Field fields={widgetOptions?.fields} />
+          <Button color="primary" variant="contained" fullWidth type="submit">
+            Submit
+          </Button>
+        </FormikProvider>
+        {/* <FormControl>
           <TextField
             fullWidth
             id="email"
@@ -59,10 +67,7 @@ const WidgetForm: FC<IWidgetForm> = ({ widget }) => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-        </FormControl>
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
-        </Button>
+        </FormControl> */}
       </StyledForm>
     </StyledWidgetForm>
   )

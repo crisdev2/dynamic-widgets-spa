@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Grid, Skeleton } from '@mui/material'
 import { useMainContext } from '../../context/mainContext'
-import Widgets from '../widgets'
+import Widget from '../widget/Widget'
 
 const StyledContent = styled.div`
 `
@@ -13,7 +13,7 @@ const Content = () => {
       {
         loaded ? 
         <>
-          <Widgets widgets={widgets} />
+          <Widget widgets={widgets} />
         </>
         :
         <>

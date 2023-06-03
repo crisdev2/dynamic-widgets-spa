@@ -3,7 +3,7 @@ import { IWidget } from '../../models/widgetsModel'
 import WidgetForm from './WidgetForm'
 import WidgetStepper from './WidgetStepper'
 
-const Widgets: FC<IWidgets> = ({ widgets }) => {
+const Widget: FC<IProps> = ({ widgets }) => {
   return (
     <>
       {widgets?.map((widget, index) => (
@@ -20,8 +20,8 @@ const Widgets: FC<IWidgets> = ({ widgets }) => {
   )
 }
 
-interface IWidgets {
+interface IProps {
   widgets?: IWidget[]
 }
 
-export default Widgets
+export default Widget

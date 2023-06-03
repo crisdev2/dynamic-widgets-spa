@@ -3,12 +3,13 @@ import { Step, StepButton, StepLabel, Stepper as MuiStepper } from '@mui/materia
 import { FC, useState } from 'react'
 import { IWidgetStepper as IWidgetModel } from '../../models/widgetsModel'
 import theme from '../../utilities/theme'
-import Widgets from '.'
+import Widget from './Widget'
 
 const StyledStepper = styled.div`
   background: ${theme.bg.content};
   padding: 1.5rem;
   border-radius: 0.25rem;
+  box-shadow: 0px 0px 35px 0px rgba(154,161,171,0.15);
 `
 
 const WidgetStepper: FC<IWidgetStepper> = ({ widget }) => {
@@ -26,7 +27,7 @@ const WidgetStepper: FC<IWidgetStepper> = ({ widget }) => {
           </Step>
         ))}
       </MuiStepper>
-      <Widgets widgets={activeWidgets} />
+      <Widget widgets={activeWidgets} />
     </StyledStepper>
   )
 }

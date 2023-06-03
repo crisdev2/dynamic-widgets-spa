@@ -1,7 +1,16 @@
+import { IFieldDate, IFieldHidden, IFieldSwitch, IFieldText } from './fieldsModel'
+
 export type IWidget = (
   | IWidgetStepper
   | IWigetAlert
   | IWidgetForm
+)
+
+export type IField = (
+  | IFieldText
+  | IFieldHidden
+  | IFieldDate
+  | IFieldSwitch
 )
 
 export interface IWidgetStepper {
@@ -17,7 +26,9 @@ export interface IWidgetStepper {
 
 export interface IWidgetForm {
   widgetType: "form"
-  widgetOptions?: null
+  widgetOptions?: {
+    fields: IField[]
+  }
   widgetItems: {
     itemType: string
     itemId: string
