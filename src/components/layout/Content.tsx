@@ -1,34 +1,10 @@
-import styled from '@emotion/styled'
-import { Grid, Skeleton } from '@mui/material'
 import { useMainContext } from '../../context/mainContext'
 import Widget from '../widget/Widget'
-
-const StyledContent = styled.div`
-`
+import { Skeleton } from 'antd'
 
 const Content = () => {
   const { widgets, loaded } = useMainContext()
-  return (
-    <StyledContent>
-      {
-        loaded ? 
-        <>
-          <Widget widgets={widgets} />
-        </>
-        :
-        <>
-          <Grid container spacing={8}>
-            {[...Array(6)].map((item, index) => (
-              <Grid item key={index} md={4}>
-                <Skeleton variant="rounded" width="100%" height="200px">
-                </Skeleton>
-              </Grid>
-            ))}
-          </Grid>
-        </>
-      }
-    </StyledContent>
-  )
+  return loaded ? <Widget widgets={widgets} /> : <Skeleton active />
 }
 
 export default Content

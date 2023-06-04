@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
-import { Collapse, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { FC, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { IMenu } from '../../models/mainModel'
 import theme from '../../utilities/theme'
 import Icon from '../shared/Icon'
+import { Collapse, MenuProps } from 'antd'
 
 const StyledListItemIcon = styled(ListItemIcon)`
   font-size: 20px;
@@ -61,6 +62,7 @@ const StyledSidebarItem = styled.div`
 `
 
 const StyledCollapse = styled(Collapse)`
+  padding-left: 8px;
   &[data-condensed][data-level="1"] {
     background: ${theme.bg.sidebar};
     padding-left: 0;
@@ -117,10 +119,14 @@ const SidebarItem: FC<ISidebarItem> = ({ item, condensed = false, level }) => {
         }
       </StyledListItemButton>
       {!!item.child?.length &&
-        <StyledCollapse in={open} timeout={condensed ? 0 : 500} unmountOnExit sx={{pl: 8}} data-condensed={condensed ? "": undefined} data-level={level}>
-          {item.child?.map((subitem, subindex) => (
-            <SidebarItem item={subitem} key={subindex} condensed={condensed} level={level + 1} />
-          ))}
+        <StyledCollapse defaultActiveKey="1" data-condensed={condensed ? '': undefined} data-level={level}>
+          <Collapse.Panel key={open ? '1' : ''} header="">
+            <>
+              {item.child?.map((subitem, subindex) => (
+                <SidebarItem item={subitem} key={subindex} condensed={condensed} level={level + 1} />
+              ))}
+            </>
+          </Collapse.Panel>
         </StyledCollapse>
       }
     </StyledSidebarItem>
@@ -132,5 +138,7 @@ interface ISidebarItem {
   condensed: boolean
   level: number
 }
+
+type MenuItem = Required<MenuProps>['items'][number];
 
 export default SidebarItem

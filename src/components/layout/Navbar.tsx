@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import { Button } from '@mui/material'
 import { FC } from 'react'
 import theme from '../../utilities/theme'
 import Icon from '../shared/Icon'
+import { Button } from 'antd'
 
 const StyledNavbar = styled.div`
   background: ${theme.bg.content};
@@ -36,7 +36,7 @@ const StyledButton = styled(Button)`
 const Navbar: FC<INavbar> = ({ toggleCondensed, condensed }) => {
   return (
     <StyledNavbar data-condensed={condensed ? "": undefined}>
-      <StyledButton color="inherit" variant="text" onClick={toggleCondensed}>
+      <StyledButton color="inherit" type="link" onClick={toggleCondensed}>
         <Icon>menu</Icon>
       </StyledButton>
     </StyledNavbar>

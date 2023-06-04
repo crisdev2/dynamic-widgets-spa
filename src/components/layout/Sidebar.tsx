@@ -1,12 +1,11 @@
 import styled from '@emotion/styled'
-import { Grid, List, ListSubheader, Skeleton } from '@mui/material'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useMainContext } from '../../context/mainContext'
 import theme from '../../utilities/theme'
 import SidebarItem from './SidebarItem'
 import SimpleBar from 'simplebar-react';
-import { Box, margin } from '@mui/system'
 import 'simplebar-react/dist/simplebar.min.css';
+import { Skeleton, Space, Typography } from 'antd'
 
 const StyledSidebar = styled.div`
   width: 260px;
@@ -42,12 +41,22 @@ const LogoWrapper = styled.div`
   }
 `
 
-const MenuWrapper = styled(SimpleBar)`
-  max-height: 100%;
+const SkeletonWrapper = styled.div`
+  width: 80%;
+  margin: auto;
+  margin-top: -12px;
+`
+
+const List = styled.nav`
+`
+
+const MenuWrapper = styled.div`
+max-height: 100%;
 `
 
 const Sidebar: FC<ISidebar> = ({ condensed }) => {
   const { sidemenu, loaded } = useMainContext()
+
   return (
     <StyledSidebar data-condensed={condensed ? "": undefined}>
       {(loaded || !!sidemenu) ?
@@ -57,53 +66,30 @@ const Sidebar: FC<ISidebar> = ({ condensed }) => {
               <LogoWrapper data-condensed={condensed ? "": undefined}>
                 <img src={sidemenu.logo.src} alt={sidemenu.logo.alt} title={sidemenu.logo.title} height={!condensed ? "26" : "16"} />
               </LogoWrapper>
-              <Box component={!condensed ? MenuWrapper : 'div'}>
+              <MenuWrapper as={!condensed ? SimpleBar : undefined}>
                 {sidemenu.items.map((item, index) => (
                   <List
                     key={index}
-                    component="nav"
                     aria-labelledby="nested-list-subheader"
-                    subheader={!condensed &&
-                      <ListSubheader component="div" disableSticky>
-                        {item.title}
-                      </ListSubheader>
-                    }
-                    sx={condensed ? {pt: 0, pb: 0} : undefined}
                   >
+                    {!condensed && 
+                      <Typography.Title level={5}>
+                        {item.title}
+                      </Typography.Title>
+                    }
                     {item.child?.map((subitem, subindex) => (
                       <SidebarItem item={subitem} key={subindex} condensed={condensed} level={1} />
                     ))}
                   </List>
                 ))}
-              </Box>
+              </MenuWrapper>
             </>
           }
         </>
         :
-        <>
-          <Skeleton variant="rectangular" width={"50%"} height={26} sx={{ margin: 'auto', mt: -12 }} />
-          <Box sx={{ maxWidth: '80%', margin: 'auto', mt: 7 }}>
-            {[...Array(3)].map((x, xIndex) => (
-              <React.Fragment key={xIndex}>
-                <Skeleton variant="rounded" width={"50%"} height={20} sx={{ mb: 4 }} />
-                <Grid container spacing={2} sx={{ mb: 4 }}>
-                  {[...Array(4)].map((y, yIndex) => (
-                    <React.Fragment key={yIndex}>
-                      {!condensed &&
-                        <Grid item xs={2}>
-                          <Skeleton variant="rounded" height={20} />
-                        </Grid>
-                      }
-                      <Grid item xs={10}>
-                        <Skeleton variant="rounded" height={20} />
-                      </Grid>
-                    </React.Fragment>
-                  ))}
-                </Grid>
-              </React.Fragment>
-            ))}
-          </Box>
-        </>
+        <SkeletonWrapper>
+          <Skeleton active />
+        </SkeletonWrapper>
       }
     </StyledSidebar>
   )
