@@ -1,8 +1,9 @@
 import styled from '@emotion/styled'
 import { Button } from '@mui/material'
 import { FC } from 'react'
-import theme from '../../utilities/theme'
-import Icon from '../shared/Icon'
+import theme from '../../../utilities/theme'
+import Icon from '../../shared/Icon'
+import { useUserLayoutContext } from '../../../context/userLayoutContext'
 
 const StyledNavbar = styled.div`
   background: ${theme.bg.content};
@@ -33,19 +34,15 @@ const StyledButton = styled(Button)`
   }
 `
 
-const Navbar: FC<INavbar> = ({ toggleCondensed, condensed }) => {
+const Navbar: FC = () => {
+  const { condensed, toggleCondensed } = useUserLayoutContext()
   return (
-    <StyledNavbar data-condensed={condensed ? "": undefined}>
+    <StyledNavbar data-condensed={condensed}>
       <StyledButton color="inherit" variant="text" onClick={toggleCondensed}>
         <Icon>menu</Icon>
       </StyledButton>
     </StyledNavbar>
   )
-}
-
-interface INavbar {
-  toggleCondensed: () => void
-  condensed: boolean
 }
 
 export default Navbar

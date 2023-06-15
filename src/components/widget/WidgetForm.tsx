@@ -12,7 +12,7 @@ const StyledWidgetForm = styled.div`
 const StyledForm = styled.form`
 `
 
-const WidgetForm: FC<IWidgetForm> = ({ widget }) => {
+const WidgetForm: FC<IProps> = ({ widget }) => {
   const { widgetOptions } = widget
   const validationSchema = yup.object({
     // email: yup
@@ -73,7 +73,7 @@ const WidgetForm: FC<IWidgetForm> = ({ widget }) => {
   )
 }
 
-interface IWidgetForm {
+interface IProps {
   widget: IWidgetModel
 }
 

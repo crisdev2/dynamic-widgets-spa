@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, TextField } from '@mui/material'
+import { FormControl, FormHelperText, Grid, TextField } from '@mui/material'
 import { FC, useEffect } from 'react'
 import { IFieldDate } from '../../models/fieldsModel'
 import { useFormikContext } from 'formik'
@@ -15,22 +15,24 @@ const FieldDate: FC<IProps> = ({ field }) => {
   }, [])
 
   return (
-    <FormControl>
-      <DatePicker
-        label={field.fieldLabel}
-        onChange={formik.handleChange}
-        defaultValue={defaultValue}
-        slotProps={{
-          textField: {
-            id: field.fieldId,
-            name: field.fieldId,
-            error: formik.touched[field.fieldId] && Boolean(formik.errors[field.fieldId]),
-            helperText: formik.touched[field.fieldId] && formik.errors[field.fieldId] as string,
-            value: formik.values[field.fieldId],
-          },
-        }}
-      />
-    </FormControl>
+    <Grid item sm={4}>
+      <FormControl fullWidth>
+        <DatePicker
+          label={field.fieldLabel}
+          onChange={formik.handleChange}
+          defaultValue={defaultValue}
+          slotProps={{
+            textField: {
+              id: field.fieldId,
+              name: field.fieldId,
+              error: formik.touched[field.fieldId] && Boolean(formik.errors[field.fieldId]),
+              helperText: formik.touched[field.fieldId] && formik.errors[field.fieldId] as string,
+              value: formik.values[field.fieldId],
+            },
+          }}
+        />
+      </FormControl>
+    </Grid>
   )
 }
 

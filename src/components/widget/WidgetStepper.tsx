@@ -12,7 +12,11 @@ const StyledStepper = styled.div`
   box-shadow: 0px 0px 35px 0px rgba(154,161,171,0.15);
 `
 
-const WidgetStepper: FC<IWidgetStepper> = ({ widget }) => {
+const StyledStep = styled(Step)`
+  margin-bottom: 20px;
+`
+
+const WidgetStepper: FC<IProps> = ({ widget }) => {
   const { widgetItems } = widget
   const [ activeStep, setActiveStep ] = useState<number>(widgetItems.findIndex(item => item.itemCompleted))
   const activeWidgets = widgetItems[activeStep].itemWidgets
@@ -20,11 +24,11 @@ const WidgetStepper: FC<IWidgetStepper> = ({ widget }) => {
     <StyledStepper>
       <MuiStepper nonLinear activeStep={activeStep} alternativeLabel>
         {widgetItems.map((item, index) => (
-          <Step key={index} completed={item.itemCompleted} disabled={!item.itemEnabled}>
+          <StyledStep key={index} completed={item.itemCompleted} disabled={!item.itemEnabled}>
             <StepButton color="inherit" onClick={() => setActiveStep(index)}>
               <StepLabel>{item.itemTitle}</StepLabel>
             </StepButton>
-          </Step>
+          </StyledStep>
         ))}
       </MuiStepper>
       <Widget widgets={activeWidgets} />
@@ -32,7 +36,7 @@ const WidgetStepper: FC<IWidgetStepper> = ({ widget }) => {
   )
 }
 
-interface IWidgetStepper {
+interface IProps {
   widget: IWidgetModel
 }
 

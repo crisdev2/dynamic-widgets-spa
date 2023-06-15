@@ -1,4 +1,4 @@
-import { IFieldDate, IFieldHidden, IFieldSwitch, IFieldText } from './fieldsModel'
+import { IFieldDate, IFieldHidden, IFieldSelect, IFieldSwitch, IFieldText } from './fieldsModel'
 
 export type IWidget = (
   | IWidgetStepper
@@ -7,10 +7,11 @@ export type IWidget = (
 )
 
 export type IField = (
-  | IFieldText
-  | IFieldHidden
   | IFieldDate
+  | IFieldHidden
+  | IFieldSelect
   | IFieldSwitch
+  | IFieldText
 )
 
 export interface IWidgetStepper {

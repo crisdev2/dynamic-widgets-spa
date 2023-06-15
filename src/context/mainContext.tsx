@@ -1,4 +1,11 @@
-import { createContext, FC, ReactNode, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetch } from '../hooks/useFetch'
 import { IBackendAPI, IRender } from '../models/mainModel'
@@ -9,7 +16,7 @@ interface IMainContext extends IRender {
   loaded: boolean
 }
 
-interface IMainProvider {
+interface IProps {
   children?: ReactNode
 }
 
@@ -21,12 +28,12 @@ const initialState = {
       breadcrumb: undefined,
       sidemenu: undefined,
       widgets: undefined,
-    }
+    },
   },
   loaded: false,
 }
 
-export const MainProvider: FC<IMainProvider> = ({ children }) => {
+export const MainProvider: FC<IProps> = ({ children }) => {
   const params = useParams()
   const path = params['*'] || 'dashboard'
   const { loaded, error, ...fetch } = useFetch(path)
@@ -43,7 +50,6 @@ export const MainProvider: FC<IMainProvider> = ({ children }) => {
       })
     }
   }, [loaded])
-  console.log('render', render)
 
   return (
     <MainContext.Provider

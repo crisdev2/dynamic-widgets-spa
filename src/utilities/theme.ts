@@ -37,10 +37,7 @@ export const customTheme = createTheme({
   spacing: 4,
   typography: {
     fontSize: 13,
-    fontFamily: [
-      '"Nunito"',
-      'sans-serif',
-    ].join(','),
+    fontFamily: ['"Nunito"', 'sans-serif'].join(','),
     h1: {
       fontSize: 36,
       fontWeight: 'bold',
@@ -67,7 +64,7 @@ export const customTheme = createTheme({
     },
     body2: {
       fontSize: 14,
-    }
+    },
   },
   palette: {
     primary: {
@@ -96,6 +93,11 @@ export const customTheme = createTheme({
     },
   },
   components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
     MuiListSubheader: {
       styleOverrides: {
         root: {
@@ -108,8 +110,8 @@ export const customTheme = createTheme({
           fontSize: 11,
           letterSpacing: '.05em',
           fontWeight: 700,
-        }
-      }
+        },
+      },
     },
     MuiListItemButton: {
       styleOverrides: {
@@ -122,18 +124,18 @@ export const customTheme = createTheme({
             color: theme.menu.hover,
           },
           '&.active': {
-            color: theme.menu.active
+            color: theme.menu.active,
           },
-        }
-      }
+        },
+      },
     },
     MuiListItemIcon: {
       styleOverrides: {
         root: {
           minWidth: 30,
           color: 'inherit',
-        }
-      }
+        },
+      },
     },
   },
 })

@@ -1,9 +1,9 @@
 import { ThemeProvider } from '@mui/material'
-import UserLayout from './components/layout'
 import { customTheme } from './utilities/theme'
 import { MainProvider } from './context/mainContext'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import UserLayout from './components/layout/user/UserLayout'
 import 'normalize.css'
 
 const App = () => {
