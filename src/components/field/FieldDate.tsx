@@ -8,6 +8,10 @@ import dayjs from 'dayjs'
 const FieldDate: FC<IProps> = ({ field }) => {
   const formik = useFormikContext<any>()
 
+  const handleChange = (newValue: string | null) => {
+    formik.setFieldValue(field.fieldId, newValue)
+  }
+
   const defaultValue = dayjs(field.fieldDefaultValue);
 
   useEffect(() => {
@@ -19,8 +23,8 @@ const FieldDate: FC<IProps> = ({ field }) => {
       <FormControl fullWidth>
         <DatePicker
           label={field.fieldLabel}
-          onChange={formik.handleChange}
-          defaultValue={defaultValue}
+          onChange={handleChange}
+          defaultValue={defaultValue as any}
           slotProps={{
             textField: {
               id: field.fieldId,

@@ -1,6 +1,9 @@
 import { createTheme } from '@mui/material'
 
+const darkMode = localStorage.getItem('darkMode') === 'On'
+
 const theme = {
+  darkMode,
   color: {
     primary: '#727cf5',
     secondary: '#0acf97',
@@ -28,8 +31,8 @@ const theme = {
     sidebar: '#313a46',
     sidebar2: '#29313b',
     header: '#ffffff',
-    body: '#f8f9fc',
-    content: '#ffffff',
+    body: darkMode ? '#343a41' : '#f8f9fc',
+    content: darkMode ? '#37404a' : '#ffffff',
   },
 }
 
@@ -67,6 +70,7 @@ export const customTheme = createTheme({
     },
   },
   palette: {
+    mode: darkMode ? 'dark' : 'light',
     primary: {
       main: theme.color.primary,
       contrastText: '#ffffff',

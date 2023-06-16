@@ -4,7 +4,9 @@ const UserLayoutContext = createContext<IUserLayoutContext | undefined>(undefine
 
 interface IUserLayoutContext {
   condensed: string | undefined
+  darkMode: string
   toggleCondensed: () => void
+  toggleDarkMode: () => void
 }
 
 interface IProps {
@@ -13,16 +15,25 @@ interface IProps {
 
 export const UserLayoutProvider: FC<IProps> = ({ children }) => {
   const [condensed, setCondensed] = useState<string | undefined>(undefined)
+  const [darkMode, setDarkMode] = useState<string>(localStorage.getItem('darkMode') || 'Off')
 
   const toggleCondensed = () => {
     setCondensed(condensed !== 'true' ? 'true' : undefined)
   }
 
+  const toggleDarkMode = () => {
+    const value = darkMode === 'Off' ? 'On' : 'Off'
+    setDarkMode(value)
+    localStorage.setItem('darkMode', value)
+  }
+
   return (
     <UserLayoutContext.Provider
       value={{
-        toggleCondensed,
         condensed,
+        darkMode,
+        toggleCondensed,
+        toggleDarkMode,
       }}
     >
       {children}

@@ -1,10 +1,17 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
 import { FC, useEffect } from 'react'
 import { IFieldSelect } from '../../models/fieldsModel'
 import { useFormikContext } from 'formik'
+import * as yup from 'yup'
 
 const FieldSelect: FC<IProps> = ({ field }) => {
   const formik = useFormikContext<any>();
+
+  const handleChange = (event: SelectChangeEvent) => {
+    formik.setFieldValue(field.fieldId, event.target.value)
+  }
+
+  const fieldMeta = formik.getFieldMeta<string>(field.fieldId)
 
   useEffect(() => {
     formik.setFieldValue(field.fieldId, field.fieldDefaultValue)
@@ -12,35 +19,34 @@ const FieldSelect: FC<IProps> = ({ field }) => {
 
   return (
     <Grid item sm={4}>
-      {/* <FormControl fullWidth>
-        <TextField
-          fullWidth
-          id={field.fieldId}
-          name={field.fieldId}
-          label={field.fieldLabel}
-          defaultValue={field.fieldDefaultValue}
-          onChange={formik.handleChange}
-          error={formik.touched[field.fieldId] && Boolean(formik.errors[field.fieldId])}
-          helperText={formik.touched[field.fieldId] && formik.errors[field.fieldId] as string}
-        />
-      </FormControl> */}
       <FormControl fullWidth>
         <InputLabel id={`${field.fieldId}-label`}>{field.fieldLabel}</InputLabel>
         <Select
           labelId={`${field.fieldId}-label`}
           id={field.fieldId}
-          value={field.fieldDefaultValue}
+          value={fieldMeta.value || field.fieldDefaultValue}
           label={field.fieldLabel}
-          onChange={formik.handleChange}
+          onChange={handleChange}
+          error={formik.touched[field.fieldId] && Boolean(formik.errors[field.fieldId])}
         >
           {field.fieldOptions.map(option => (
             <MenuItem value={option.id} key={option.id}>{option.label}</MenuItem>
           ))}
         </Select>
-        {/* TODO: Errors and helper text */}
+        {formik.touched[field.fieldId] && !!formik.errors[field.fieldId] &&
+          <FormHelperText error>{formik.errors[field.fieldId] as string}</FormHelperText>
+        }
       </FormControl>
     </Grid>
   )
+}
+
+export const FieldSelectValidations = (field: IFieldSelect) => {
+  let validation = yup.string()
+  if (field.fieldRequired) {
+    validation = validation.required('This field is required')
+  }
+  return validation
 }
 
 interface IProps {
