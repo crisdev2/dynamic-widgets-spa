@@ -5,7 +5,7 @@ import Container from './Container'
 import { useUserLayoutContext } from '../../../context/userLayoutContext'
 
 const StyledMain = styled.div`
-  background: ${theme.bg.body};
+  background: ${props => theme(props.theme.palette?.mode === 'dark').bg.body};
   margin-left: 260px;
   overflow: hidden;
   padding: 70px 12px 65px;

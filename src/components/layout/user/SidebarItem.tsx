@@ -43,15 +43,15 @@ const StyledListItemButton = styled(ListItemButton)`
     padding-left: 25px;
     transition: none;
     &:hover {
-      background: ${theme.color.primary};
+      background: ${theme().color.primary};
       color: ${(p) => p.theme.palette?.primary.contrastText};
     }
   }
   &[data-condensed][data-level='2'] {
-    color: ${theme.menu.item};
-    background: ${theme.bg.sidebar2};
+    color: ${theme().menu.item};
+    background: ${theme().bg.sidebar2};
     &:hover {
-      color: ${theme.menu.hover};
+      color: ${theme().menu.hover};
     }
   }
 `
@@ -60,7 +60,7 @@ const StyledSidebarItem = styled.div`
   &[data-condensed][data-level='1'] {
     &:hover {
       width: 260px;
-      background: ${theme.color.primary};
+      background: ${theme().color.primary};
       color: ${(p) => p.theme.palette?.primary.contrastText};
     }
   }
@@ -68,7 +68,7 @@ const StyledSidebarItem = styled.div`
 
 const StyledCollapse = styled(Collapse)`
   &[data-condensed][data-level='1'] {
-    background: ${theme.bg.sidebar};
+    background: ${props => theme(props.theme.palette?.mode === 'dark').bg.sidebar};
     padding-left: 0;
     position: absolute;
     left: 70px;

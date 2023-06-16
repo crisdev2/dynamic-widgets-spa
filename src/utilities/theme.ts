@@ -1,9 +1,6 @@
 import { createTheme } from '@mui/material'
 
-const darkMode = localStorage.getItem('darkMode') === 'On'
-
-const theme = {
-  darkMode,
+const theme = (darkMode?: boolean) => ({
   color: {
     primary: '#727cf5',
     secondary: '#0acf97',
@@ -13,10 +10,10 @@ const theme = {
     info: '#3095b2',
     light: '#eef2f7',
     dark: '#313a46',
-    pageTitle: '#6c757d',
+    pageTitle: darkMode ? '#ffffff' : '#6c757d',
   },
   navbar: {
-    menu: '#313a46',
+    menu: darkMode ? '#ffffff' : '#313a46',
   },
   breadcrumb: {
     icon: '#ced4da',
@@ -28,15 +25,15 @@ const theme = {
     active: '#ffffff',
   },
   bg: {
-    sidebar: '#313a46',
+    sidebar: darkMode ? '#3a444e' : '#313a46',
     sidebar2: '#29313b',
     header: '#ffffff',
     body: darkMode ? '#343a41' : '#f8f9fc',
     content: darkMode ? '#37404a' : '#ffffff',
   },
-}
+})
 
-export const customTheme = createTheme({
+export const customTheme = (darkMode: boolean) => createTheme({
   spacing: 4,
   typography: {
     fontSize: 13,
@@ -72,27 +69,27 @@ export const customTheme = createTheme({
   palette: {
     mode: darkMode ? 'dark' : 'light',
     primary: {
-      main: theme.color.primary,
+      main: theme(darkMode).color.primary,
       contrastText: '#ffffff',
     },
     secondary: {
-      main: theme.color.secondary,
+      main: theme(darkMode).color.secondary,
       contrastText: '#ffffff',
     },
     success: {
-      main: theme.color.success,
+      main: theme(darkMode).color.success,
       contrastText: '#ffffff',
     },
     error: {
-      main: theme.color.error,
+      main: theme(darkMode).color.error,
       contrastText: '#ffffff',
     },
     warning: {
-      main: theme.color.warning,
+      main: theme(darkMode).color.warning,
       contrastText: '#ffffff',
     },
     info: {
-      main: theme.color.info,
+      main: theme(darkMode).color.info,
       contrastText: '#ffffff',
     },
   },
@@ -109,7 +106,7 @@ export const customTheme = createTheme({
           paddingLeft: 30,
           paddingRight: 30,
           backgroundColor: 'transparent',
-          color: theme.menu.item,
+          color: theme(darkMode).menu.item,
           textTransform: 'uppercase',
           fontSize: 11,
           letterSpacing: '.05em',
@@ -124,11 +121,11 @@ export const customTheme = createTheme({
           paddingRight: 30,
           transition: 'all .4s',
           '&:hover': {
-            backgroundColor: theme.bg.sidebar,
-            color: theme.menu.hover,
+            backgroundColor: theme(darkMode).bg.sidebar,
+            color: theme(darkMode).menu.hover,
           },
           '&.active': {
-            color: theme.menu.active,
+            color: theme(darkMode).menu.active,
           },
         },
       },

@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import { UserLayoutProvider } from '../../../context/userLayoutContext'
 import Main from './Main'
+import UserLayoutWrapper from './UserLayoutWrapper'
 
 const Wrapper = styled.div`
   height: 100%;
@@ -17,10 +18,7 @@ const Wrapper = styled.div`
 const UserLayout = () => {
   return (
     <UserLayoutProvider>
-      <Wrapper>
-        <Sidebar />
-        <Main />
-      </Wrapper>
+      <UserLayoutWrapper />
     </UserLayoutProvider>
   )
 }

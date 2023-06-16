@@ -8,11 +8,11 @@ import Link from '../../shared/Link'
 const StyledBreadcrumb = styled(Breadcrumbs)``
 
 const StyledIcon = styled(Icon)`
-  color: ${theme.breadcrumb.icon};
+  color: ${theme().breadcrumb.icon};
 `
 
 const Item = styled.span`
-  color: ${theme.breadcrumb.item};
+  color: ${theme().breadcrumb.item};
 `
 
 const Breadcrumb = () => {

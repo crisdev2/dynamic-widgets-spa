@@ -6,10 +6,10 @@ import theme from '../../utilities/theme'
 import Widget from './Widget'
 
 const StyledStepper = styled.div`
-  background: ${theme.bg.content};
+  background: ${props => theme(props.theme.palette?.mode === 'dark').bg.content};
   padding: 1.5rem;
   border-radius: 0.25rem;
-  box-shadow: 0px 0px 35px 0px rgba(154,161,171,0.15);
+  box-shadow: ${props => props.theme.palette?.mode === 'dark' ? 'none' : '0px 0px 35px 0px rgba(154,161,171,0.15)'};
 `
 
 const StyledStep = styled(Step)`

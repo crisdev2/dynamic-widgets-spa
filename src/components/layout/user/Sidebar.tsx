@@ -13,8 +13,8 @@ import 'simplebar-react/dist/simplebar.min.css'
 const StyledSidebar = styled.div`
   width: 260px;
   z-index: 10;
-  background: ${theme.bg.sidebar};
-  color: ${theme.menu.item};
+  background: ${props => theme(props.theme.palette?.mode === 'dark').bg.sidebar};
+  color: ${theme().menu.item};
   bottom: 0;
   position: fixed;
   top: 0;
@@ -29,7 +29,7 @@ const StyledSidebar = styled.div`
 `
 
 const LogoWrapper = styled.div`
-  background: ${theme.bg.sidebar};
+  background: ${props => theme(props.theme.palette?.mode === 'dark').bg.sidebar};
   width: 260px;
   position: fixed;
   top: 0;

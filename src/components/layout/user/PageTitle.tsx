@@ -4,7 +4,7 @@ import { useMainContext } from '../../../context/mainContext'
 import theme from '../../../utilities/theme'
 
 const StyledPageTitle = styled(Typography)`
-  color: ${theme.color.pageTitle};
+  color: ${props => theme(props.theme.palette?.mode === 'dark').color.pageTitle};
 `
 
 const PageTitle = () => {
